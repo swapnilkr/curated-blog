@@ -13,6 +13,7 @@ function PostListPage() {
     const [posts, setPosts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedCategoryName, setSelectedCategoryName] = useState('');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(false);
@@ -63,11 +64,12 @@ function PostListPage() {
                     categories={categories}
                     setPage={setPage}
                     setSelectedCategory={setSelectedCategory}
+                    setSelectedCategoryName={setSelectedCategoryName}
                     innerRef={categoryDropdownRef} />
                 {loading ? (
                     <Shimmer view="list" />
                 ) : (
-                    <PostList posts={posts} />
+                    <PostList posts={posts} selectedCategoryName={selectedCategoryName} />
                 )}
             </div>
             <Paginator page={page} setPage={setPage} totalPages={totalPages} />

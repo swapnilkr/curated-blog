@@ -1,10 +1,12 @@
 import React from 'react';
 import '../styles/CategoryDropdown.css';
 
-const CategoryDropdown = ({ categories, setPage, setSelectedCategory, innerRef }) => {
+const CategoryDropdown = ({ categories, setPage, setSelectedCategory, innerRef, setSelectedCategoryName }) => {
+
     const handleCategoryChange = (event) => {
         setSelectedCategory(event.target.value);
         setPage(1);
+        setSelectedCategoryName(categories.filter((item) => item?.slug === event?.target?.value )[0]?.name || '');
     };
 
     return (

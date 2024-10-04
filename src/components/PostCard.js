@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/PostCard.css';
 import { categoryColorMapping } from '../helpers/const';
 import { Link } from 'react-router-dom';
+import ImageShimmer from './ImageShimmer';
+import Logo from '../assets/truecaller.svg'
 
+const PostCard = ({ post, selectedCategoryName = '' }) => {
 
-const PostCard = ({ post }) => {
-    let categoryName = Object.keys(post?.categories)[0] || '';
+    let allCategoryPostBelong = Object.keys(post?.categories);
+    let categoryName = (allCategoryPostBelong.includes(selectedCategoryName) ? selectedCategoryName : allCategoryPostBelong[0]) || '';
+
+    const [isImageLoaded, setImageLoaded] = useState(false);
+    const [isImageError, setImageError] = useState(false);
+
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+    };
+
+    const handleImageError = () => {
+        setImageError(true);
+    };
+
+    useEffect(() => {
+        if (!post?.post_thumbnail?.URL) {
+            setImageError(true);
+        }
+    }, [post?.post_thumbnail?.URL]);
 
     return (
         <div className="post-card shadow">
@@ -19,7 +39,23 @@ const PostCard = ({ post }) => {
                     </span>
                 </div>
                 <div className="post-thumbnail">
-                    <img src={post?.post_thumbnail?.URL} alt={post?.title} />
+                    {!isImageLoaded && !isImageError && <ImageShimmer />}
+                    {post?.post_thumbnail?.URL && !isImageError && (
+                        <img
+                            src={post.post_thumbnail.URL}
+                            alt={post?.title}
+                            style={{ display: isImageLoaded ? 'block' : 'none' }}
+                            onLoad={handleImageLoad}
+                            onError={handleImageError}
+                        />
+                    )}
+                    {isImageError &&
+                        <img
+                            style={{objectFit:'contain'}}
+                            src={Logo}
+                            alt={post?.title}
+                        />
+                    }
                 </div>
                 <div className="post-card-content">
                     {/* to handle unicode */}
