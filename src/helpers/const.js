@@ -1,9 +1,3 @@
-export const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-};
-
 export const categoryColorMapping = {
     "App Features": "#FF5733",
     "Behind the Code": "#33FF57",
@@ -22,4 +16,10 @@ export const categoryColorMapping = {
     "Truecrew Brand Ambassadors": "#3357D4",
     "Women at Truecaller": "#FF3399",
     "default": "#CCCCCC"
+};
+
+export const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
 };
