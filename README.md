@@ -38,10 +38,11 @@ Project deployed at: https://curated-blog.vercel.app/
 
 ##	Additional Features:
 
-	Implemented fallback shimmer for loading states.
-	Handles cases where no content is returned for categories.
-	Separate Image shimmer for high resolution images
-	For post with no image url showing truecaller logo as fallback
+	1. Implemented fallback shimmer for loading states.
+	2. Handles cases where no content is returned for categories. (ex -> category: random)
+	3. Separate Image shimmer for high resolution images, so that people need not wait for image load and can atleast start reading aticle
+	4. For post with no image url showing truecaller logo as fallback
+	5. Added title and logo at Tab level
 
 
 ### Notes
